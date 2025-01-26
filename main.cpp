@@ -5,8 +5,6 @@ using namespace std;
 
 int main() {
     bool run = true;
-    // have to open txt file!!!!!!!!!!!!!!!!!!!!!!
-    FILE bank_file;
 
     while(run) {
         cout << "***Account Information System***" << endl;
@@ -17,6 +15,7 @@ int main() {
         cout << "4-->Update record" << endl;
         cout << "5-->Delete record" << endl;
         cout << "6-->Quit" << endl;
+        cout << "\n";
 
         int choice;
         cout << "Enter your choice" << endl;
@@ -24,24 +23,25 @@ int main() {
 
         switch (choice) {
             case 1: {
-                Record new_record = Record();
-                add_record(new_record, bank_file);
+                add_record();
                 break;
             }
             case 2: {
-                display_records(get_all_records(bank_file));
+                display_records();
                 break;
             }
             case 3: {
-                search_record(get_all_records(bank_file));
+                vector<Record> records = get_all_records();
+                int index = search_record(records);
+                display_record(records.at(index));
                 break;
             }
             case 4: {
-                update_record(search_record(get_all_records(bank_file)), bank_file);
+                update_record();
                 break;
             }
             case 5: {
-                delete_record(search_record(get_all_records(bank_file)), bank_file);
+                delete_record();
                 break;
             }
             case 6: {

@@ -5,12 +5,15 @@
 #ifndef MINI_PROJET_C__FUNCTIONS_H
 #define MINI_PROJET_C__FUNCTIONS_H
 
+#include <fstream>
+#include <vector>
 #include <iostream>
 using namespace std;
 
 class Record{
 private:
-    int account_number, phone_number, balance;
+    int account_number, phone_number;
+    float balance;
     string firstname, lastname;
 
 public:
@@ -25,6 +28,15 @@ public:
         cin >> Record::phone_number;
         cout << "Enter balance:" << endl;
         cin >> Record::balance;
+
+    }
+
+    Record(int account_number, string firstname, string lastname, int phone_number, float balance){
+        Record::account_number = account_number;
+        Record::firstname = firstname;
+        Record::lastname = lastname;
+        Record::phone_number = phone_number;
+        Record::balance = balance;
 
     }
 
@@ -44,44 +56,46 @@ public:
         phone_number = phoneNumber;
     }
 
-    int getBalance() const {
+    float getBalance() const {
         return balance;
     }
 
-    void setBalance(int balance) {
+    void setBalance(float balance) {
         Record::balance = balance;
     }
 
-    const string &getFirstname() const {
+    string &getFirstname(){
         return firstname;
     }
 
-    void setFirstname(const string &firstname) {
+    void setFirstname(string firstname) {
         Record::firstname = firstname;
     }
 
-    const string &getLastname() const {
+    string &getLastname(){
         return lastname;
     }
 
-    void setLastname(const string &lastname) {
+    void setLastname(string lastname) {
         Record::lastname = lastname;
     }
 };
 
 // get all the records in the file
-Record* get_all_records(FILE file);
+vector<Record> get_all_records();
 // add record at the end of file
-void add_record(Record record, FILE file);
+void add_record();
 // read file and display all the records
-void display_records(Record* records);
+void display_records();
+// display one record
+void display_record(Record record);
 // ask what we xant to change in the record, change it and save it at its old place in file
-void update_record(Record record, FILE file);
+void update_record();
 // remove record from records array and save file
-void delete_record(Record record, FILE file);
+void delete_record();
 // display number of records, ask an account number and display record associated with it
-Record search_record(Record* record);
+int search_record(vector<Record> records);
 // save records in file
-void save_record(Record* records, FILE file);
+void save_record(vector<Record> records);
 
 #endif //MINI_PROJET_C__FUNCTIONS_H
